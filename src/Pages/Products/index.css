@@ -1,0 +1,98 @@
+@import url('https://enkidu-ui.netlify.app/css/style.css');
+
+.product-container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 20rem 1fr;
+  grid-template-rows: 5rem 1fr;
+  grid-template-areas:
+    'aside main '
+    'aside main ';
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+aside {
+  grid-area: aside;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  margin-left: 1em;
+  padding: 1rem;
+  margin-top: 1rem;
+}
+
+main {
+  grid-area: main;
+  margin-right: 2em;
+  padding: 2rem;
+  margin-top: 1rem;
+  border: 1px solid rgb(0, 0, 0, 0.1);
+}
+
+/* ---------------------------  */
+/* FILTER SECTION  */
+/* ---------------------------  */
+
+.prod-filter {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  padding-bottom: 1rem;
+}
+
+.prod-filter-type {
+  font-size: 0.9rem;
+  color: rgb(0, 0, 0, 0.6);
+  letter-spacing: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.prod-func {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.prod-filter-heading {
+  display: flex;
+  margin-top: 3rem;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.prod-filter-heading button {
+  border: none;
+  outline: none;
+  width: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.3rem;
+  background-color: var(--primary-button);
+}
+
+/* ---------------------------  */
+/* MAIN PRODUCT SECTION  */
+/* ---------------------------  */
+
+.prod-heading {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+}
+
+.prod-container {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  justify-content: center;
+  border-left: 1px solid rgb(0, 0, 0, 0.2);
+  border-right: 1px solid rgb(0, 0, 0, 0.2);
+  grid-template-columns: repeat(auto-fit, 18rem);
+}
