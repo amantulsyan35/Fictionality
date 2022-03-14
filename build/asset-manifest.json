@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.01ee7ac6.css",
+    "main.js": "/static/js/main.1ec0bdbe.js",
+    "static/media/fiction.jpg": "/static/media/fiction.1d73dab140308c7e7444.jpg",
+    "static/media/bestsellers.jpg": "/static/media/bestsellers.d4e1ea179af352ea1c32.jpg",
+    "static/media/tutorials.png": "/static/media/tutorials.82dd83a98082a4062a79.png",
+    "static/media/non-fiction.jpg": "/static/media/non-fiction.e7ededb4fd61c7b84840.jpg",
+    "index.html": "/index.html",
+    "main.01ee7ac6.css.map": "/static/css/main.01ee7ac6.css.map",
+    "main.1ec0bdbe.js.map": "/static/js/main.1ec0bdbe.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.01ee7ac6.css",
+    "static/js/main.1ec0bdbe.js"
+  ]
+}
