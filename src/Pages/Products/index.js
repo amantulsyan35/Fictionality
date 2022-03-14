@@ -36,7 +36,7 @@ const Product = () => {
         <ProductFilterComp className='prod-filter'>
           <h4 className='prod-filter-type'>CATEGORY</h4>
           {['Fiction', 'Tutorials', 'Non-Fiction'].map((productLabel) => {
-            return <ProductFilterComp label={productLabel} type='checkbox' />;
+            return <ProductFilter label={productLabel} type='checkbox' />;
           })}
         </ProductFilterComp>
 
