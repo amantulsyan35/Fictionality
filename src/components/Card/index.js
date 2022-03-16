@@ -19,3 +19,36 @@ export const ProductCard = ({ src, alt, desc, price, className }) => {
     </div>
   );
 };
+
+export const CartCard = ({ src, alt, desc, price }) => {
+  return (
+    <div class='cart-card'>
+      <div class='cart-hero'>
+        <img src={src} alt={alt} />
+      </div>
+      <div class='cart-body'>
+        <p class='cart-card-body-desc'>{desc}</p>
+        <p class='cart-card-body-desc'>
+          <span>₹</span> {price}
+        </p>
+        <p class='cart-card-body-desc'>50 %</p>
+        <div class='cart-quantity'>
+          <p>Quantity</p>
+          <div class='cart-qty-button'>
+            <button>
+              <i class='fa fa-minus-square' aria-hidden='true'></i>
+            </button>
+            <span class='cart-qty-number'>1</span>
+            <button>
+              <i class='fa fa-plus-square' aria-hidden='true'></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class='cart-footer'>
+        <button class='btn-primary'>SAVE FOR LATER</button>
+        <button class='btn-secondary'>REMOVE</button>
+      </div>
+    </div>
+  );
+};

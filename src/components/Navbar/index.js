@@ -41,7 +41,7 @@ const Navbar = () => {
       <div className='nav-links-container'>
         <ul className='nav-links'>
           <NavList icon='heart' to='/wishlist' />
-          <NavList icon='cart' to='/cart' />
+          <NavList icon='cart' to='/checkout' />
         </ul>
       </div>
     </nav>
