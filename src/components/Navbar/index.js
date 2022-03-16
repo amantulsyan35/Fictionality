@@ -1,5 +1,5 @@
 //External Dependencies
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaSearch, FaHeart, FaCartPlus } from 'react-icons/fa';
 
 import './index.css';
@@ -14,13 +14,19 @@ const NavSearch = () => {
   );
 };
 
-const NavList = ({ icon }) => {
+const NavList = ({ icon, to }) => {
   return (
     <li>
-      <Link to='#'>
-        {icon === 'heart' && <FaHeart className='nav-icon' />}
-        {icon === 'cart' && <FaCartPlus className='nav-icon' />}
-      </Link>
+      {icon === 'heart' && (
+        <Link to={to}>
+          <FaHeart className='nav-icon' />
+        </Link>
+      )}
+      {icon === 'cart' && (
+        <Link to={to}>
+          <FaCartPlus className='nav-icon' />
+        </Link>
+      )}
     </li>
   );
 };
@@ -34,8 +40,8 @@ const Navbar = () => {
       <NavSearch />
       <div className='nav-links-container'>
         <ul className='nav-links'>
-          <NavList icon='heart' />
-          <NavList icon='cart' />
+          <NavList icon='heart' to='/wishlist' />
+          <NavList icon='cart' to='/cart' />
         </ul>
       </div>
     </nav>
