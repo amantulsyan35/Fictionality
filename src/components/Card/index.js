@@ -1,10 +1,10 @@
-export const ProductCard = ({ src, alt, desc, price }) => {
+export const ProductCard = ({ src, alt, desc, price, className }) => {
   return (
     <div className='prod-card'>
       <div className='prod-card-hero'>
         <img src={src} alt={alt} />
         <span className='prod-card-wishlist'>
-          <i className='fas fa-heart prod-wishlist-icon'></i>
+          <i className={`fas fa-heart ${className}`}></i>
         </span>
       </div>
       <div className='prod-card-body'>

@@ -1,6 +1,6 @@
 // import { Link } from 'react-router-dom';
 
-import './index.css';
+import './product.css';
 import '../../styles/base.css';
 import { ProductCard } from '../../components/Card';
 
@@ -65,7 +65,7 @@ const Product = () => {
       </aside>
 
       {/* PRODUCTS SECTION */}
-      <main>
+      <main className='prod-main'>
         <div className='prod-heading'>
           <h4>Showing All Products</h4>
           <span>(Showing 20 Products)</span>
@@ -76,6 +76,7 @@ const Product = () => {
             alt='naruto_manga'
             desc='Naruto Manga VOL.1'
             price='200'
+            className='prod-wishlist-icon'
           />
         </div>
       </main>
