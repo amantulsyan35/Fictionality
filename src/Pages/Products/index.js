@@ -29,7 +29,7 @@ const ProductFilter = ({ label, type, name, onChange, checked }) => {
   );
 };
 
-// MAIN PRODUCT COMPONENTS
+// MAIN PRODUCT COMPONENT
 const Product = () => {
   const { filterState, filterDispatch } = useProductFilter();
   const { productState, productDispatch } = useProduct();
