@@ -22,7 +22,7 @@ const Checkout = () => {
         <h4>MY CART (2)</h4>
       </div>
 
-      <main>
+      <main className='checkout-main'>
         <section className='cart-product-section'>
           <CartCard
             src='https://cdn.wallpapersafari.com/83/43/cGUTKa.jpg'
@@ -54,9 +54,11 @@ const Checkout = () => {
               price='200'
             />
 
-            <p class='cart-checkout-save'>You will save 1999 on this order</p>
-            <div class='cart-checkout-footer'>
-              <button class='btn-primary'>PLACE ORDER</button>
+            <p className='cart-checkout-save'>
+              You will save 1999 on this order
+            </p>
+            <div className='cart-checkout-footer'>
+              <button className='btn-primary'>PLACE ORDER</button>
             </div>
           </div>
         </section>

@@ -1,4 +1,4 @@
-export const ProductCard = ({ src, alt, desc, price, className }) => {
+export const ProductCard = ({ src, alt, desc, price, className, inStock }) => {
   return (
     <div className='prod-card'>
       <div className='prod-card-hero'>
@@ -11,6 +11,9 @@ export const ProductCard = ({ src, alt, desc, price, className }) => {
         <p className='prod-card-desc'>{desc}</p>
         <p className='prod-card-price'>
           <span>₹</span> {price}
+        </p>
+        <p className='prod-card-price'>
+          {inStock ? 'In Stock' : 'Out Of Stock'}
         </p>
       </div>
       <div className='prod-card-footer'>

@@ -47,6 +47,7 @@ aside {
   color: rgb(0, 0, 0, 0.6);
   letter-spacing: 0.3rem;
   margin-bottom: 1rem;
+  cursor: pointer;
 }
 
 .prod-func {

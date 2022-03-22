@@ -5,8 +5,8 @@ import { ProductCard } from '../../components/Card';
 
 const Wishlist = () => {
   return (
-    <div class='wishlist-container'>
-      <div class='wishlist-heading'>
+    <div className='wishlist-container'>
+      <div className='wishlist-heading'>
         <h4>MY WISHLIST</h4>
       </div>
 

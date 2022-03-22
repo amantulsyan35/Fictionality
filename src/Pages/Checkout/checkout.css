@@ -19,7 +19,7 @@
   margin-right: 7rem;
 }
 
-main {
+.checkout-main {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 30rem;

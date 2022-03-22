@@ -35,7 +35,7 @@ const Navbar = () => {
   return (
     <nav className='nav-container'>
       <div className='nav-logo'>
-        <Link to='#'>[ &#128296;, &#128119;]</Link>
+        <Link to='/'>[ &#128214;, &#9961;]</Link>
       </div>
       <NavSearch />
       <div className='nav-links-container'>
