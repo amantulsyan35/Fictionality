@@ -36,7 +36,7 @@ const Signup = () => {
           </div>
           <FormButton label='Create New Account' />
           <div class='form-footer'>
-            <Link to='#'>Already have an account</Link>
+            <Link to='/login'>Already have an account</Link>
           </div>
         </form>
       </div>

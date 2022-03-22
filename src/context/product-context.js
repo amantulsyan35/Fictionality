@@ -1,4 +1,5 @@
-import { createContext, useContext, useReducer, useState } from 'react';
+import { createContext, useContext, useReducer } from 'react';
+import { addToCart } from '../utils/productFeat';
 
 const ProductContext = createContext();
 
@@ -8,7 +9,16 @@ const ProductProvider = ({ children }) => {
       case 'FETCH_PRODUCT':
         return { ...state, filteredProducts: action.payload };
       case 'ADD_TO_CART':
-        return {};
+        return {
+          ...state,
+          cartProducts: addToCart(state.cartProducts, action.payload),
+        };
+      case 'REMOVE_FROM_CART':
+        return { ...state, cartProducts: action.payload };
+      case 'ADD_TO_WISHLIST':
+        return { ...state, wishListProducts: action.payload };
+      case 'REMOVE_FROM_WISHLIST':
+        return { ...state, wishListProducts: action.payload };
       default:
         return state;
     }
@@ -16,6 +26,8 @@ const ProductProvider = ({ children }) => {
 
   const [productState, productDispatch] = useReducer(productReducerFunc, {
     filteredProducts: [],
+    cartProducts: [],
+    wishListProducts: [],
   });
 
   return (

@@ -8,12 +8,6 @@ export const getSortedData = (productList, sortBy) => {
   );
 };
 
-// export const getRatedData = (productList, rateBy) => {
-//   if (rateBy === null) return productList;
-
-//   return productList.filter((p) => p.rating >= rateBy);
-// };
-
 export const getFilteredProducts = (
   productList,
   showInventoryAll,

@@ -56,6 +56,7 @@ const Product = () => {
         filterState.rateBy,
         filterState.priceRange
       );
+
       productDispatch({
         type: 'FETCH_PRODUCT',
         payload: filteredProducts,
@@ -70,6 +71,10 @@ const Product = () => {
     filterDispatch({
       type: 'RESET',
     });
+  };
+
+  const handleCart = (product) => {
+    productDispatch({ type: 'ADD_TO_CART', payload: product });
   };
 
   return (
@@ -210,6 +215,7 @@ const Product = () => {
                   price={p.price}
                   inStock={p.inStock}
                   className='prod-wishlist-icon'
+                  handleCart={() => handleCart(p)}
                 />
               );
             })}

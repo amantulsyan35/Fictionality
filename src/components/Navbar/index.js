@@ -2,7 +2,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { FaSearch, FaHeart, FaCartPlus } from 'react-icons/fa';
 
-import './index.css';
+import './Navbar.css';
 import '../../styles/base.css';
 
 const NavSearch = () => {
@@ -42,6 +42,9 @@ const Navbar = () => {
         <ul className='nav-links'>
           <NavList icon='heart' to='/wishlist' />
           <NavList icon='cart' to='/checkout' />
+          <Link to='/signup' className='btn-primary '>
+            Signup
+          </Link>
         </ul>
       </div>
     </nav>
