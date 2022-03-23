@@ -1,0 +1,148 @@
+@import url('https://enkidu-ui.netlify.app/css/style.css');
+
+.cart-container {
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  margin: 3rem 2rem;
+  padding: 2rem;
+  height: auto;
+}
+
+.cart-heading {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-left: 7rem;
+  margin-right: 7rem;
+}
+
+main {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 30rem;
+}
+
+.cart-product-section {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+}
+
+.cart-checkout-section {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ---------------------------  */
+/* PRODUCT SECTION  */
+/* ---------------------------  */
+
+.cart-card {
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: space-between;
+}
+
+.cart-hero {
+  width: 30rem;
+}
+
+.cart-hero img {
+  max-width: 100%;
+  object-fit: cover;
+  height: 100%;
+}
+
+.cart-body {
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+
+.cart-card-body-desc {
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  width: 100%;
+}
+
+.cart-quantity {
+  box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem;
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+}
+
+.cart-qty-button button {
+  text-decoration: none;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.cart-footer {
+  border: 1px solid rgb(0, 0, 0, 0.1);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 30rem;
+  gap: 1rem;
+}
+
+.cart-footer button {
+  padding: 0.5rem;
+  border: none;
+  outline: transparent;
+}
+
+/* ---------------------------  */
+/* CART DETAILS SECTION  */
+/* ---------------------------  */
+
+.cart-details-container {
+  border: 1px solid rgb(0, 0, 0, 0.2);
+  padding: 0.5rem;
+}
+
+.cart-details {
+  display: flex;
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  justify-content: space-between;
+  padding: 0.5rem;
+}
+
+.cart-total {
+  border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cart-checkout-save {
+  margin-top: 1rem;
+}
+
+.cart-checkout-footer {
+  margin-top: 1rem;
+}
+
+.cart-checkout-footer button {
+  width: 100%;
+  height: 100%;
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+}

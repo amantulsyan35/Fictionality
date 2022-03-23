@@ -19,12 +19,28 @@ const Homepage = () => {
   return (
     <div class='homepage-category'>
       <div class='hpg-genre-container-1'>
-        <HomepageCard className='hpg-genre-1' to='#' title='Fiction' />
-        <HomepageCard className='hpg-genre-2' to='#' title='Tutorials' />
-        <HomepageCard className='hpg-genre-3' to='#' title='Non Fiction' />
+        <HomepageCard
+          className='hpg-genre-1'
+          to='/explore/fiction'
+          title='Fiction'
+        />
+        <HomepageCard
+          className='hpg-genre-2'
+          to='/explore/tutorials'
+          title='Tutorials'
+        />
+        <HomepageCard
+          className='hpg-genre-3'
+          to='/explore/non-fiction'
+          title='Non Fiction'
+        />
       </div>
       <div class='hpg-genre-container-2'>
-        <HomepageCard className='hpg-best-genre' to='#' title='Bestsellers' />
+        <HomepageCard
+          className='hpg-best-genre'
+          to='/explore/bestseller'
+          title='Bestsellers'
+        />
       </div>
     </div>
   );
