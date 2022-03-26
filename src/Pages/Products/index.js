@@ -11,6 +11,8 @@ import './product.css';
 import '../../styles/base.css';
 import { ProductCard } from '../../components/Card';
 
+import { ProductFilter, ProductFilterComp } from './productPageComp';
+
 //UTILS
 import { getSortedData, getFilteredProducts } from '../../utils/productFilter';
 import { addToCart, addToWishList } from '../../utils/productFeat';
@@ -23,8 +25,6 @@ import {
   addProductsToWishList,
   removeProductsFromWishList,
 } from '../../services/wishlist-service';
-
-import { ProductFilter, ProductFilterComp } from './productPageComp';
 
 // MAIN PRODUCT COMPONENT
 const Product = () => {
