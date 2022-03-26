@@ -1,7 +1,6 @@
 //THIRD PART DEPENDENCIES
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 
 // CONTEXT
 import { useProductFilter } from '../../context/product-filter-context';
@@ -14,20 +13,18 @@ import { ProductCard } from '../../components/Card';
 
 //UTILS
 import { getSortedData, getFilteredProducts } from '../../utils/productFilter';
+import { addToCart, addToWishList } from '../../utils/productFeat';
+import { wrapAsync } from '../../utils/wrapAsync';
 
-// COMPONENTS NEEDED BY THIS SPECIFIC PAGE
-const ProductFilterComp = ({ children, className }) => {
-  return <div className={className}>{children}</div>;
-};
+//SERVICES
+import { fetchProducts } from '../../services/product-service';
+import { addProductsToCart } from '../../services/cart-service';
+import {
+  addProductsToWishList,
+  removeProductsFromWishList,
+} from '../../services/wishlist-service';
 
-const ProductFilter = ({ label, type, name, onChange, checked }) => {
-  return (
-    <div className='prod-func'>
-      <input checked={checked} onChange={onChange} name={name} type={type} />
-      <label>{label}</label>
-    </div>
-  );
-};
+import { ProductFilter, ProductFilterComp } from './productPageComp';
 
 // MAIN PRODUCT COMPONENT
 const Product = () => {
@@ -36,46 +33,78 @@ const Product = () => {
   let param = useParams();
 
   useEffect(() => {
-    async function fetchProducts() {
-      const response = await axios.get('/api/products');
+    wrapAsync(async () => {
       let categoryProduct = [];
 
+      const products = await fetchProducts();
+
       if (param.productName === 'best-sellers') {
-        categoryProduct = response.data.products.filter(
-          (p) => p.bestSeller === true
-        );
+        categoryProduct = products.filter((p) => p.bestSeller === true);
       } else {
-        categoryProduct = response.data.products.filter(
+        categoryProduct = products.filter(
           (p) => p.categoryName === param.productName
         );
+
+        let filteredProducts = getFilteredProducts(
+          getSortedData(categoryProduct, filterState.sortBy),
+          filterState.showInventoryAll,
+          filterState.rateBy,
+          filterState.priceRange
+        );
+
+        productDispatch({
+          type: 'FETCH_PRODUCT',
+          payload: filteredProducts,
+        });
       }
-
-      let filteredProducts = getFilteredProducts(
-        getSortedData(categoryProduct, filterState.sortBy),
-        filterState.showInventoryAll,
-        filterState.rateBy,
-        filterState.priceRange
-      );
-
-      productDispatch({
-        type: 'FETCH_PRODUCT',
-        payload: filteredProducts,
-      });
-    }
-    fetchProducts();
+    })();
   }, [filterState]);
 
   //RESET FUNCTION
-
   const handleReset = () => {
     filterDispatch({
       type: 'RESET',
     });
   };
 
-  const handleCart = (product) => {
-    productDispatch({ type: 'ADD_TO_CART', payload: product });
-  };
+  // CART FUNCTIONALITY
+  const handleCart = wrapAsync(async (product) => {
+    const productsExists = addToCart(productState.cartProducts, product);
+    if (!productsExists) {
+      const cartProducts = await addProductsToCart(product);
+      productDispatch({
+        type: 'ADD_TO_CART',
+        payload: cartProducts,
+      });
+      alert(`${product.title} has been added to cart`);
+    } else {
+      alert(`${product.title} already exists`);
+    }
+  });
+
+  //WISHLIST FUNCTION
+  const handleWishlist = wrapAsync(async (product) => {
+    const productsExists = addToWishList(
+      productState.wishListProducts,
+      product
+    );
+
+    if (!productsExists) {
+      const wishListProducts = await addProductsToWishList(product);
+      productDispatch({
+        type: 'ADD_TO_WISHLIST',
+        payload: wishListProducts,
+      });
+      alert(`${product.title} has been added to wishlist`);
+    } else {
+      const wishListProducts = await removeProductsFromWishList(product);
+      productDispatch({
+        type: 'ADD_TO_WISHLIST',
+        payload: wishListProducts,
+      });
+      alert(`${product.title} removed from wishList`);
+    }
+  });
 
   return (
     <div className='product-container'>
@@ -216,6 +245,7 @@ const Product = () => {
                   inStock={p.inStock}
                   className='prod-wishlist-icon'
                   handleCart={() => handleCart(p)}
+                  handleWishlist={() => handleWishlist(p)}
                 />
               );
             })}

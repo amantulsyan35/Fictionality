@@ -1,6 +1,7 @@
 import './App.css';
 
 import { Routes, Route } from 'react-router-dom';
+import Mockman from 'mockman-js';
 
 import Navbar from './components/Navbar';
 import { Homepage, Product, Wishlist, Checkout, Login, Signup } from './Pages';
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/mock' element={<Mockman />}></Route>
       </Routes>
     </div>
   );

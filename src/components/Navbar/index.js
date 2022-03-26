@@ -1,5 +1,5 @@
 //External Dependencies
-import { Link, NavLink } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaSearch, FaHeart, FaCartPlus } from 'react-icons/fa';
 
 import './Navbar.css';
@@ -32,6 +32,18 @@ const NavList = ({ icon, to }) => {
 };
 
 const Navbar = () => {
+  let navigate = useNavigate();
+  const encodedToken = window.localStorage.getItem('encodedToken');
+
+  const handleLogout = () => {
+    try {
+      window.localStorage.clear();
+      navigate('/signup');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <nav className='nav-container'>
       <div className='nav-logo'>
@@ -42,9 +54,15 @@ const Navbar = () => {
         <ul className='nav-links'>
           <NavList icon='heart' to='/wishlist' />
           <NavList icon='cart' to='/checkout' />
-          <Link to='/signup' className='btn-primary '>
-            Signup
-          </Link>
+          {encodedToken ? (
+            <button className='btn btn-primary' onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <Link to='/signup' className='btn-primary '>
+              Signup
+            </Link>
+          )}
         </ul>
       </div>
     </nav>

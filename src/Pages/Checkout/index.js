@@ -1,7 +1,19 @@
+import { useEffect } from 'react';
+
 import './checkout.css';
 import '../../styles/base.css';
 
 import { CartCard } from '../../components/Card';
+
+import { useProduct } from '../../context/product-context';
+import { wrapAsync } from '../../utils/wrapAsync';
+
+import { updateProducts } from '../../services/product-service';
+import {
+  fetchCartProducts,
+  removeProductsFromCart,
+} from '../../services/cart-service';
+import { addProductsToWishList } from '../../services/wishlist-service';
 
 const CartDetail = ({ className, title, price, qty }) => {
   return (
@@ -16,20 +28,76 @@ const CartDetail = ({ className, title, price, qty }) => {
 };
 
 const Checkout = () => {
+  const { productState, productDispatch } = useProduct();
+
+  useEffect(() => {
+    wrapAsync(async () => {
+      productDispatch({
+        type: 'ADD_TO_CART',
+        payload: await fetchCartProducts(),
+      });
+    })();
+  }, [productState.cartProducts]);
+
+  const handleIncrement = wrapAsync(async (product) => {
+    await updateProducts(product, 'increment');
+  });
+
+  const handleDecrement = wrapAsync(async (product) => {
+    if (product.qty === 1) {
+      const cartProducts = await removeProductsFromCart(product, 'decrement');
+      productDispatch({
+        type: 'ADD_TO_CART',
+        payload: cartProducts,
+      });
+    } else {
+      await updateProducts(product, 'decrement');
+    }
+  });
+
+  const handleWishlist = wrapAsync(async (product) => {
+    const wishListProducts = await addProductsToWishList(product);
+    productDispatch({
+      type: 'ADD_TO_WISHLIST',
+      payload: wishListProducts,
+    });
+    alert(`${product.title} has been added to wishlist`);
+  });
+
+  const handleDelete = wrapAsync(async (product) => {
+    const cartProducts = await removeProductsFromCart(product);
+    productDispatch({
+      type: 'ADD_TO_CART',
+      payload: cartProducts,
+    });
+  });
+
   return (
     <div className='cart-container'>
       <div className='cart-heading'>
-        <h4>MY CART (2)</h4>
+        <h4>MY CART {`(${productState.cartProducts.length})`}</h4>
       </div>
 
       <main className='checkout-main'>
         <section className='cart-product-section'>
-          <CartCard
-            src='https://cdn.wallpapersafari.com/83/43/cGUTKa.jpg'
-            alt='naruto_manga'
-            desc='Naruto Manga VOL.1'
-            price='200'
-          />
+          {productState.cartProducts &&
+            productState.cartProducts.map((prod) => {
+              return (
+                <CartCard
+                  key={prod._id}
+                  src={prod.coverImage}
+                  alt={prod.title}
+                  desc={prod.title}
+                  price={prod.price}
+                  discount={prod.discount}
+                  qty={prod.qty}
+                  handleIncrement={() => handleIncrement(prod)}
+                  handleDecrement={() => handleDecrement(prod)}
+                  handleWishlist={() => handleWishlist(prod)}
+                  handleDelete={() => handleDelete(prod)}
+                />
+              );
+            })}
         </section>
         <section className='cart-checkout-section'>
           <div className='cart-details-heading'>

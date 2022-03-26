@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer } from 'react';
-import { addToCart } from '../utils/productFeat';
 
 const ProductContext = createContext();
 
@@ -11,14 +10,23 @@ const ProductProvider = ({ children }) => {
       case 'ADD_TO_CART':
         return {
           ...state,
-          cartProducts: addToCart(state.cartProducts, action.payload),
+          cartProducts: action.payload,
         };
       case 'REMOVE_FROM_CART':
         return { ...state, cartProducts: action.payload };
+
       case 'ADD_TO_WISHLIST':
-        return { ...state, wishListProducts: action.payload };
+        return {
+          ...state,
+          wishListProducts: action.payload,
+          wishListed: !state.wishListed,
+        };
       case 'REMOVE_FROM_WISHLIST':
-        return { ...state, wishListProducts: action.payload };
+        return {
+          ...state,
+          wishListProducts: action.payload,
+          wishListed: !state.wishListed,
+        };
       default:
         return state;
     }
@@ -28,6 +36,7 @@ const ProductProvider = ({ children }) => {
     filteredProducts: [],
     cartProducts: [],
     wishListProducts: [],
+    wishListed: false,
   });
 
   return (
