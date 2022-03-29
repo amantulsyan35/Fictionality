@@ -29,7 +29,6 @@ const CartDetail = ({ className, title, price, qty }) => {
 
 const Checkout = () => {
   const { productState, productDispatch } = useProduct();
-
   useEffect(() => {
     wrapAsync(async () => {
       productDispatch({

@@ -52,8 +52,8 @@ const Navbar = () => {
       <NavSearch />
       <div className='nav-links-container'>
         <ul className='nav-links'>
-          <NavList icon='heart' to='/wishlist' />
-          <NavList icon='cart' to='/checkout' />
+          <NavList icon='heart' to='user/wishlist' />
+          <NavList icon='cart' to='user/checkout' />
           {encodedToken ? (
             <button className='btn btn-primary' onClick={handleLogout}>
               Logout

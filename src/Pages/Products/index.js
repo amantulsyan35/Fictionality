@@ -1,6 +1,7 @@
 //THIRD PART DEPENDENCIES
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // CONTEXT
 import { useProductFilter } from '../../context/product-filter-context';
@@ -31,6 +32,7 @@ const Product = () => {
   const { filterState, filterDispatch } = useProductFilter();
   const { productState, productDispatch } = useProduct();
   let param = useParams();
+  const encodeToken = window.localStorage.getItem('encodedToken');
 
   useEffect(() => {
     wrapAsync(async () => {
@@ -69,40 +71,49 @@ const Product = () => {
 
   // CART FUNCTIONALITY
   const handleCart = wrapAsync(async (product) => {
-    const productsExists = addToCart(productState.cartProducts, product);
-    if (!productsExists) {
-      const cartProducts = await addProductsToCart(product);
-      productDispatch({
-        type: 'ADD_TO_CART',
-        payload: cartProducts,
-      });
-      alert(`${product.title} has been added to cart`);
+    if (encodeToken) {
+      const productsExists = addToCart(productState.cartProducts, product);
+
+      if (!productsExists) {
+        const cartProducts = await addProductsToCart(product);
+        productDispatch({
+          type: 'ADD_TO_CART',
+          payload: cartProducts,
+        });
+        alert(`${product.title} has been added to cart`);
+      } else {
+        alert(`${product.title} already exists`);
+      }
     } else {
-      alert(`${product.title} already exists`);
+      alert('You are not logged in');
     }
   });
 
   //WISHLIST FUNCTION
   const handleWishlist = wrapAsync(async (product) => {
-    const productsExists = addToWishList(
-      productState.wishListProducts,
-      product
-    );
+    if (encodeToken) {
+      const productsExists = addToWishList(
+        productState.wishListProducts,
+        product
+      );
 
-    if (!productsExists) {
-      const wishListProducts = await addProductsToWishList(product);
-      productDispatch({
-        type: 'ADD_TO_WISHLIST',
-        payload: wishListProducts,
-      });
-      alert(`${product.title} has been added to wishlist`);
+      if (!productsExists) {
+        const wishListProducts = await addProductsToWishList(product);
+        productDispatch({
+          type: 'ADD_TO_WISHLIST',
+          payload: wishListProducts,
+        });
+        alert(`${product.title} has been added to wishlist`);
+      } else {
+        const wishListProducts = await removeProductsFromWishList(product);
+        productDispatch({
+          type: 'ADD_TO_WISHLIST',
+          payload: wishListProducts,
+        });
+        alert(`${product.title} removed from wishList`);
+      }
     } else {
-      const wishListProducts = await removeProductsFromWishList(product);
-      productDispatch({
-        type: 'ADD_TO_WISHLIST',
-        payload: wishListProducts,
-      });
-      alert(`${product.title} removed from wishList`);
+      alert('You are not logged in');
     }
   });
 
@@ -243,7 +254,11 @@ const Product = () => {
                   desc={p.title}
                   price={p.price}
                   inStock={p.inStock}
-                  className='prod-wishlist-icon'
+                  className={
+                    productState.wishListed
+                      ? 'prod-wishlisted'
+                      : 'prod-wishlist-icon'
+                  }
                   handleCart={() => handleCart(p)}
                   handleWishlist={() => handleWishlist(p)}
                 />

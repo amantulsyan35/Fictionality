@@ -26,7 +26,7 @@ const Login = () => {
 
       window.localStorage.setItem(
         'encodedToken',
-        JSON.stringify(loggedInUser.data.encodedToken)
+        loggedInUser.data.encodedToken
       );
 
       navigate('/');
