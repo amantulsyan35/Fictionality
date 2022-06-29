@@ -1,13 +1,22 @@
 import './App.css';
 
+import { Routes, Route } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
-import FictionalityRoute from './routes/FictionalityRoute';
+import { Homepage, Product, Wishlist, Checkout, Login, Signup } from './Pages';
 
 const App = () => {
   return (
     <div className='App'>
       <Navbar />
-      <FictionalityRoute />
+      <Routes>
+        <Route path='/' element={<Homepage />} />
+        <Route path='/explore/:productName' element={<Product />} />
+        <Route path='/wishlist' element={<Wishlist />} />
+        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/signup' element={<Signup />} />
+      </Routes>
     </div>
   );
 };

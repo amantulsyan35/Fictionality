@@ -1,20 +1,8 @@
-export const FormInput = ({
-  label,
-  type,
-  placeholder,
-  className,
-  onChange,
-  name,
-}) => {
+export const FormInput = ({ label, type, placeholder, className }) => {
   return (
     <div className={className}>
       <label>{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder ? placeholder : null}
-        onChange={onChange}
-        name={name}
-      />
+      <input type={type} placeholder={placeholder ? placeholder : null} />
     </div>
   );
 };

@@ -1,15 +1,7 @@
-import './button.css';
-
-export const FormButton = ({ label, onClick, disabledAttr }) => {
+export const FormButton = ({ label }) => {
   return (
     <div className='form-button'>
-      <button
-        className={
-          disabledAttr ? 'disabled-button' : 'btn btn-icon btn-primary'
-        }
-        onClick={onClick}
-        disabled={disabledAttr}
-      >
+      <button className='btn btn-icon btn-primary'>
         <i className='fas fa-shopping-cart'></i>
         {label}
       </button>
