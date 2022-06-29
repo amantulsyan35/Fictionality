@@ -5,6 +5,7 @@
   margin: 3rem 2rem;
   padding: 2rem;
   height: auto;
+  width: auto;
 }
 
 .cart-heading {
@@ -19,7 +20,7 @@
   margin-right: 7rem;
 }
 
-main {
+.checkout-main {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 30rem;
