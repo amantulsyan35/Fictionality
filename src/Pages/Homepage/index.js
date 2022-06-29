@@ -17,8 +17,8 @@ const HomepageCard = ({ className, to, title }) => {
 
 const Homepage = () => {
   return (
-    <div className='homepage-category'>
-      <div className='hpg-genre-container-1'>
+    <div class='homepage-category'>
+      <div class='hpg-genre-container-1'>
         <HomepageCard
           className='hpg-genre-1'
           to='/explore/fiction'
@@ -26,7 +26,7 @@ const Homepage = () => {
         />
         <HomepageCard
           className='hpg-genre-2'
-          to='/explore/tutorial'
+          to='/explore/tutorials'
           title='Tutorials'
         />
         <HomepageCard
@@ -35,10 +35,10 @@ const Homepage = () => {
           title='Non Fiction'
         />
       </div>
-      <div className='hpg-genre-container-2'>
+      <div class='hpg-genre-container-2'>
         <HomepageCard
           className='hpg-best-genre'
-          to='/explore/best-sellers'
+          to='/explore/bestseller'
           title='Bestsellers'
         />
       </div>

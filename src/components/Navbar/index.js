@@ -1,8 +1,8 @@
 //External Dependencies
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { FaSearch, FaHeart, FaCartPlus } from 'react-icons/fa';
 
-import './Navbar.css';
+import './index.css';
 import '../../styles/base.css';
 
 const NavSearch = () => {
@@ -32,37 +32,16 @@ const NavList = ({ icon, to }) => {
 };
 
 const Navbar = () => {
-  let navigate = useNavigate();
-  const encodedToken = window.localStorage.getItem('encodedToken');
-
-  const handleLogout = () => {
-    try {
-      window.localStorage.clear();
-      navigate('/signup');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <nav className='nav-container'>
       <div className='nav-logo'>
-        <Link to='/'>[ &#128214;, &#9961;]</Link>
+        <Link to='#'>[ &#128296;, &#128119;]</Link>
       </div>
       <NavSearch />
       <div className='nav-links-container'>
         <ul className='nav-links'>
-          <NavList icon='heart' to='user/wishlist' />
-          <NavList icon='cart' to='user/checkout' />
-          {encodedToken ? (
-            <button className='btn btn-primary' onClick={handleLogout}>
-              Logout
-            </button>
-          ) : (
-            <Link to='/signup' className='btn-primary '>
-              Signup
-            </Link>
-          )}
+          <NavList icon='heart' to='/wishlist' />
+          <NavList icon='cart' to='/checkout' />
         </ul>
       </div>
     </nav>
