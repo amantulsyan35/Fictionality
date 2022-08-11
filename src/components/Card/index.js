@@ -9,6 +9,7 @@ export const ProductCard = ({
   inStock,
   handleCart,
   handleWishlist,
+  isWishlisted,
 }) => {
   return (
     <div className='prod-card'>

@@ -49,7 +49,7 @@ const Navbar = () => {
       <div className='nav-logo'>
         <Link to='/'>[ &#128214;, &#9961;]</Link>
       </div>
-      <NavSearch />
+      {/*<NavSearch />*/}
       <div className='nav-links-container'>
         <ul className='nav-links'>
           <NavList icon='heart' to='user/wishlist' />

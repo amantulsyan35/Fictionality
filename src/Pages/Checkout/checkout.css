@@ -23,7 +23,7 @@
 .checkout-main {
   display: grid;
   gap: 1rem;
-  grid-template-columns: 1fr 30rem;
+  grid-template-columns: 1fr;
 }
 
 .cart-product-section {

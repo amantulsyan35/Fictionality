@@ -1,29 +1,20 @@
 import { useEffect } from 'react';
 import axios from 'axios';
-
 import { useNavigate } from 'react-router-dom';
-
 import './wishlist.css';
 import '../../styles/base.css';
-
 import { ProductCard } from '../../components/Card';
-
 import { useProduct } from '../../context/product-context';
-
 import { wrapAsync } from '../../utils/wrapAsync';
-
 import { addToCart } from '../../utils/productFeat';
+import { removeProductsFromWishList } from '../../services/wishlist-service';
 
 const Wishlist = () => {
   const { productState, productDispatch } = useProduct();
   let navigate = useNavigate();
-
+  const encodedToken = window.localStorage.getItem('encodedToken');
   useEffect(() => {
     async function showWishList() {
-      const encodedToken = JSON.parse(
-        window.localStorage.getItem('encodedToken')
-      );
-
       const response = await axios({
         method: 'get',
         url: '/api/user/wishlist',
@@ -38,12 +29,19 @@ const Wishlist = () => {
     showWishList();
   });
 
+  const handleWishlist = wrapAsync(async (product) => {
+    const wishListProducts = await removeProductsFromWishList(product);
+    productDispatch({
+      type: 'ADD_TO_WISHLIST',
+      payload: wishListProducts,
+    });
+    alert(`${product.title} removed from wishList`);
+  });
+
   const handleCart = wrapAsync(async (product) => {
     const productsExists = addToCart(productState.cartProducts, product);
 
-    const encodedToken = JSON.parse(
-      window.localStorage.getItem('encodedToken')
-    );
+    const encodedToken = window.localStorage.getItem('encodedToken');
 
     if (!productsExists) {
       const response = await axios({
@@ -54,6 +52,7 @@ const Wishlist = () => {
           product: product,
         },
       });
+
       const response2 = await axios({
         method: 'delete',
         url: `/api/user/wishlist/${product._id}`,
@@ -69,7 +68,7 @@ const Wishlist = () => {
         payload: response2.data.wishlist,
       });
       alert(`${product.title} has been added to cart`);
-      navigate('/checkout');
+      navigate('/user/checkout');
     } else {
       const response2 = await axios({
         method: 'delete',
@@ -80,7 +79,7 @@ const Wishlist = () => {
         type: 'ADD_TO_WISHLIST',
         payload: response2.data.wishlist,
       });
-      navigate('/checkout');
+      navigate('/user/checkout');
     }
   });
 
@@ -103,13 +102,14 @@ const Wishlist = () => {
                 inStock={prod.inStock}
                 className='prod-wishlisted'
                 handleCart={() => handleCart(prod)}
+                handleWishlist={() => handleWishlist(prod)}
               />
             );
           })}
         {productState.wishListProducts.length === 0 && (
           <img
             alt='no_wishlist'
-            src='https://shop.myfelt.com/skin/frontend/rwd/myfelt-2018/images/cart-noitem-mobile.gif'
+            src='https://payload.cargocollective.com/1/1/44904/10607674/Wishlist.gif'
           />
         )}
       </main>

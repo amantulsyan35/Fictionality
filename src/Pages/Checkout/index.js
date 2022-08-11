@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import './checkout.css';
 import '../../styles/base.css';
@@ -15,25 +15,27 @@ import {
 } from '../../services/cart-service';
 import { addProductsToWishList } from '../../services/wishlist-service';
 
-const CartDetail = ({ className, title, price, qty }) => {
-  return (
-    <div className={className}>
-      <p>{title}</p>
-      {qty && <p>{`(${qty} items)`}</p>}
-      <p>
-        <span>₹</span> {price}
-      </p>
-    </div>
-  );
-};
+// TODO: IF SOMEDAY CURIOSITY OF ECOM STRIKES BACK
+// const CartDetail = ({ className, title, price, qty }) => {
+//   return (
+//     <div className={className}>
+//       <p>{title}</p>
+//       {qty && <p>{`(${qty} items)`}</p>}
+//       <p>
+//         <span>₹</span> {price}
+//       </p>
+//     </div>
+//   );
+// };
 
 const Checkout = () => {
   const { productState, productDispatch } = useProduct();
   useEffect(() => {
     wrapAsync(async () => {
+      const cartProducts = await fetchCartProducts();
       productDispatch({
         type: 'ADD_TO_CART',
-        payload: await fetchCartProducts(),
+        payload: cartProducts,
       });
     })();
   }, [productState.cartProducts]);
@@ -98,7 +100,9 @@ const Checkout = () => {
               );
             })}
         </section>
-        <section className='cart-checkout-section'>
+
+        {/*TODO: IF SOMEDAY CURIOSITY OF ECOM STRIKES BACK*/}
+        {/*<section className='cart-checkout-section'>
           <div className='cart-details-heading'>
             <h4>PRICE DETAILS</h4>
           </div>
@@ -128,7 +132,7 @@ const Checkout = () => {
               <button className='btn-primary'>PLACE ORDER</button>
             </div>
           </div>
-        </section>
+          </section>*/}
       </main>
     </div>
   );

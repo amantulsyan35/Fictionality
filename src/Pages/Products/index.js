@@ -1,7 +1,6 @@
 //THIRD PART DEPENDENCIES
-import { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 // CONTEXT
 import { useProductFilter } from '../../context/product-filter-context';
@@ -31,8 +30,9 @@ import {
 const Product = () => {
   const { filterState, filterDispatch } = useProductFilter();
   const { productState, productDispatch } = useProduct();
+  const [mutatedArray, setMutatedArray] = useState([]);
   let param = useParams();
-  const encodeToken = window.localStorage.getItem('encodedToken');
+  const encodedToken = window.localStorage.getItem('encodedToken');
 
   useEffect(() => {
     wrapAsync(async () => {
@@ -53,6 +53,7 @@ const Product = () => {
           filterState.rateBy,
           filterState.priceRange
         );
+        setMutatedArray(filteredProducts);
 
         productDispatch({
           type: 'FETCH_PRODUCT',
@@ -71,7 +72,7 @@ const Product = () => {
 
   // CART FUNCTIONALITY
   const handleCart = wrapAsync(async (product) => {
-    if (encodeToken) {
+    if (encodedToken) {
       const productsExists = addToCart(productState.cartProducts, product);
 
       if (!productsExists) {
@@ -91,7 +92,7 @@ const Product = () => {
 
   //WISHLIST FUNCTION
   const handleWishlist = wrapAsync(async (product) => {
-    if (encodeToken) {
+    if (encodedToken) {
       const productsExists = addToWishList(
         productState.wishListProducts,
         product
@@ -99,17 +100,25 @@ const Product = () => {
 
       if (!productsExists) {
         const wishListProducts = await addProductsToWishList(product);
+        const updatedFilteredProducts = mutatedArray.map((x) =>
+          x._id === product._id ? { ...x, wishlisted: !x.wishlisted } : x
+        );
         productDispatch({
           type: 'ADD_TO_WISHLIST',
           payload: wishListProducts,
         });
+        setMutatedArray(updatedFilteredProducts);
         alert(`${product.title} has been added to wishlist`);
       } else {
         const wishListProducts = await removeProductsFromWishList(product);
+        const updatedFilteredProducts = mutatedArray.map((x) =>
+          x._id === product._id ? { ...x, wishlisted: !x.wishlisted } : x
+        );
         productDispatch({
           type: 'ADD_TO_WISHLIST',
           payload: wishListProducts,
         });
+        setMutatedArray(updatedFilteredProducts);
         alert(`${product.title} removed from wishList`);
       }
     } else {
@@ -244,8 +253,8 @@ const Product = () => {
           <span>(Showing {productState.filteredProducts.length} Products)</span>
         </div>
         <div className='prod-container'>
-          {productState.filteredProducts &&
-            productState.filteredProducts.map((p) => {
+          {mutatedArray &&
+            mutatedArray.map((p) => {
               return (
                 <ProductCard
                   key={p.id}
@@ -255,9 +264,7 @@ const Product = () => {
                   price={p.price}
                   inStock={p.inStock}
                   className={
-                    productState.wishListed
-                      ? 'prod-wishlisted'
-                      : 'prod-wishlist-icon'
+                    p.wishlisted ? 'prod-wishlisted' : 'prod-wishlist-icon'
                   }
                   handleCart={() => handleCart(p)}
                   handleWishlist={() => handleWishlist(p)}
