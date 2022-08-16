@@ -4,6 +4,12 @@
 
 [[Ecommerce Application]: Changelog](https://www.amantulsyan.com/ecommerce-application-changelog)
 
+# Login Credentials
+
+email: adarshbalika@gmail.com
+
+password: adarshbalika
+
 ## Improvements
 
 - Better UI
