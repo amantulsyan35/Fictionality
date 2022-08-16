@@ -2,6 +2,8 @@
 
 [Ecommerce Clothing Store v1](https://github.com/amantulsyan35/ecom-store)
 
+[[Ecommerce Application]: Changelog](https://www.amantulsyan.com/ecommerce-application-changelog)
+
 ## Improvements
 
 - Better UI
